@@ -27,4 +27,18 @@ $routes->group('', static function ($routes) {
     $routes->post('tenant', 'Admin\TenantController::store');
     $routes->put('tenant/(:num)', 'Admin\TenantController::update/$1');
     $routes->delete('tenant/(:num)', 'Admin\TenantController::destroy/$1');
+
+    // Property
+    $routes->get('property', 'Admin\PropertyController::index');
+    $routes->post('property', 'Admin\PropertyController::store');
+    $routes->put('property/(:num)', 'Admin\PropertyController::update/$1');
+    $routes->delete('property/(:num)', 'Admin\PropertyController::destroy/$1');
+
+
+    // Detail Property
+    $routes->get('detail-property', 'Admin\DetailPropertyController::index');
+    $routes->post('detail-property', 'Admin\DetailPropertyController::store');
+    $routes->put('detail-property/(:num)', 'Admin\DetailPropertyController::update/$1');
+    $routes->delete('detail-property/(:num)', 'Admin\DetailPropertyController::destroy/$1');
+    
 });

@@ -1,21 +1,21 @@
 <?= $this->extend('layouts/AdminLayouts'); ?>
 <?= $this->section('content'); ?>
 <div class="pagetitle">
-    <h1>Users</h1>
+    <h1>Properti</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active">Data Users</li>
+            <li class="breadcrumb-item active">Properti</li>
         </ol>
     </nav>
-</div>
-<?= $this->include('components/_message'); ?>
-<section class="section user">
+</div><!-- End Page Title -->
+
+<section class="section properti">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="card-title">Daftar Data User</h5>
+                        <h5 class="card-title">Daftar Data Properti</h5>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#TambahModal">
                             + Tambah Data
                         </button>
@@ -25,19 +25,19 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">Password</th>
-                                <th scope="col">Role / Hak Akses</th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">Harga</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($DataUsers as $index => $item) : ?>
+                            <?php foreach ($DataProperties as $index => $item) : ?>
                                 <tr>
                                     <th scope="row"><?= $index + 1; ?></th>
-                                    <td><?= $item['username']; ?></td>
-                                    <td><i>Password are Hidden</i></td>
-                                    <td><?= $item['role']; ?></td>
+                                    <td><?= $item['name_property']; ?></td>
+                                    <td><?= $item['price_property']; ?></td>
+                                    <td><?= $item['status_property']; ?></td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#EditModal<?= $index; ?>">
                                             Edit
@@ -49,29 +49,14 @@
                                         <!-- Edit Modal -->
                                         <div class="modal fade" id="EditModal<?= $index; ?>" tabindex="-1">
                                             <div class="modal-dialog">
-                                                <form action="<?= base_url('user/' . $item['id_user']); ?>" class="modal-content" method="POST">
+                                                <form action="<?= base_url('property/' . $item['id_property']); ?>" class="modal-content" method="POST">
                                                     <input type="hidden" name="_method" value="PUT">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Edit User</h5>
+                                                        <h5 class="modal-title">Edit Property</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="mb-3">
-                                                            <label for="username" class="form-label">Username</label>
-                                                            <input value="<?= $item['username']; ?>" type="text" class="form-control" id="username" name="username" required>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="password" class="form-label">Password</label>
-                                                            <input type="password" class="form-control" id="password" name="password">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label for="role" class="form-label">Role / Hak Akses</label>
-                                                            <select class="form-select" id="role" name="role" required>
-                                                                <option selected disabled>Pilih Role / Hak Akses</option>
-                                                                <option <?= ($item['role'] == 'admin') ? 'selected' : null; ?> value="admin">Admin</option>
-                                                                <option <?= ($item['role'] == 'penyewa') ? 'selected' : null; ?> value="penyewa">Penyewa</option>
-                                                            </select>
-                                                        </div>
+
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -85,14 +70,14 @@
                                         <!-- Modal Hapus -->
                                         <div class="modal fade text-start" id="HapusModal<?= $index; ?>" tabindex="-1">
                                             <div class="modal-dialog">
-                                                <form action="<?= base_url('user/' . $item['id_user']); ?>" class="modal-content" method="POST">
+                                                <form action="<?= base_url('property/' . $item['id_property']); ?>" class="modal-content" method="POST">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Hapus User</h5>
+                                                        <h5 class="modal-title">Hapus Property</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p>Yakin Hapus <span class="fw-bold"><?= $item['username']; ?></span>?</p>
+                                                        <p>Yakin Hapus <span class="fw-bold"><?= $item['name_property']; ?></span>?</p>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -115,24 +100,23 @@
                     <div class="modal-dialog">
                         <form class="modal-content" method="POST">
                             <div class="modal-header">
-                                <h5 class="modal-title">Tambah User</h5>
+                                <h5 class="modal-title">Tambah Property</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" required>
+                                    <label for="name_property" class="form-label">Nama Properti</label>
+                                    <input type="text" class="form-control" id="name_property" name="name_property">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <label for="price_property" class="form-label">Harga Properti</label>
+                                    <input type="number" class="form-control" id="price_property" name="price_property">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="role" class="form-label">Role / Hak Akses</label>
-                                    <select class="form-select" id="role" name="role" required>
-                                        <option selected disabled>Pilih Role / Hak Akses</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="penyewa">Penyewa</option>
+                                    <label for="status_property" class="form-label">Status Properti</label>
+                                    <select class="form-select" id="status_property" name="status_property">
+                                        <option value="Tersedia">Tersedia</option>
+                                        <option value="Tidak Tersedia">Tidak Tersedia</option>
                                     </select>
                                 </div>
                             </div>
