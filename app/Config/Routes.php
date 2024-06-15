@@ -16,8 +16,15 @@ $routes->group('', static function ($routes) {
 
 // Private Routes
 $routes->group('', static function ($routes) {
+    // Users
     $routes->get('user', 'Admin\UserController::index');
     $routes->post('user', 'Admin\UserController::store');
     $routes->put('user/(:num)', 'Admin\UserController::update/$1');
     $routes->delete('user/(:num)', 'Admin\UserController::destroy/$1');
+
+    // Tenant
+    $routes->get('tenant', 'Admin\TenantController::index');
+    $routes->post('tenant', 'Admin\TenantController::store');
+    $routes->put('tenant/(:num)', 'Admin\TenantController::update/$1');
+    $routes->delete('tenant/(:num)', 'Admin\TenantController::destroy/$1');
 });
