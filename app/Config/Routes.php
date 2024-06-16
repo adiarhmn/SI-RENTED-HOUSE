@@ -36,9 +36,9 @@ $routes->group('', static function ($routes) {
 
 
     // Detail Property
-    $routes->get('detail-property', 'Admin\DetailPropertyController::index');
-    $routes->post('detail-property', 'Admin\DetailPropertyController::store');
+    $routes->get('detail-property/(:num)', 'Admin\DetailPropertyController::index/$1');
+    $routes->post('detail-property/(:num)', 'Admin\DetailPropertyController::store/$1');
     $routes->put('detail-property/(:num)', 'Admin\DetailPropertyController::update/$1');
     $routes->delete('detail-property/(:num)', 'Admin\DetailPropertyController::destroy/$1');
-    
+
 });

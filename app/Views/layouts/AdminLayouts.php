@@ -107,6 +107,12 @@
             </li>
             <li class="nav-heading">Data Master</li>
             <li class="nav-item">
+                <a class="nav-link " href="<?= base_url('/profil'); ?>">
+                    <i class="bi bi-blockquote-right"></i>
+                    <span>Profil Sistem</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link " href="<?= base_url('/user'); ?>">
                     <i class="bi bi-people"></i>
                     <span>Users</span>
