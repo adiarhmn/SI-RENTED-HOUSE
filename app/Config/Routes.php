@@ -5,17 +5,28 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', static function () {
-    return redirect()->to('/dashboard');
-});
+$routes->get('/', 'Public\DashboardController::index');
 
 // Public Routes
 $routes->group('', static function ($routes) {
-    $routes->get('dashboard', 'Admin\DashboardController::index');
 });
 
-// Private Routes
+// Before Auth Routes
 $routes->group('', static function ($routes) {
+    $routes->get('login', 'AuthController::index');
+    $routes->post('login', 'AuthController::Login');
+});
+
+// After Routes
+$routes->group('', static function ($routes) {
+    $routes->get('logout', 'AuthController::logout');
+});
+
+
+// Private Routes
+$routes->group('', ['filter' => 'AdminFilter'], static function ($routes) {
+
+    $routes->get('dashboard', 'Admin\DashboardController::index');
     // Users
     $routes->get('user', 'Admin\UserController::index');
     $routes->post('user', 'Admin\UserController::store');
@@ -40,5 +51,4 @@ $routes->group('', static function ($routes) {
     $routes->post('detail-property/(:num)', 'Admin\DetailPropertyController::store/$1');
     $routes->put('detail-property/(:num)', 'Admin\DetailPropertyController::update/$1');
     $routes->delete('detail-property/(:num)', 'Admin\DetailPropertyController::destroy/$1');
-
 });
