@@ -49,7 +49,7 @@ class TableRent extends Migration
             ],
             'status_rent' => [
                 'type' => 'ENUM',
-                'constraint' => ['PENDING', 'BERLANGSUNG', 'SELESAI', 'DIBATALKAN'],
+                'constraint' => ['PENDING', 'BERLANGSUNG', 'SELESAI'],
             ],
             'created_at' => [
                 'type' => 'DATETIME',

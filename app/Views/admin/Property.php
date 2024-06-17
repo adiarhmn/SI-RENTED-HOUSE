@@ -105,7 +105,7 @@
                                                                 <label for="status_property" class="form-label">Status Properti</label>
                                                                 <select class="form-select" id="status_property" name="status_property">
                                                                     <option value="Tersedia" <?= $item['status_property'] == 'Tersedia' ? 'selected' : ''; ?>>Tersedia</option>
-                                                                    <option value="Tidak Tersedia" <?= $item['status_property'] == 'Tidak Tersedia' ? 'selected' : ''; ?>>Tidak Tersedia</option>
+                                                                    <option value="Rented" <?= $item['status_property'] == 'Rented' ? 'selected' : ''; ?>>Tidak Tersedia</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -168,7 +168,7 @@
                                     <label for="status_property" class="form-label">Status Properti</label>
                                     <select class="form-select" id="status_property" name="status_property">
                                         <option value="Tersedia">Tersedia</option>
-                                        <option value="Tidak Tersedia">Tidak Tersedia</option>
+                                        <option value="Rented">Tidak Tersedia</option>
                                     </select>
                                 </div>
                             </div>

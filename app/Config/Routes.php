@@ -36,6 +36,8 @@ $routes->group('', static function ($routes) {
 $routes->group('penyewa', ['filter' => 'TenantFilter'], static function ($routes) {
     $routes->get('dashboard', 'Public\DashboardController::DashboardTenant');
     $routes->get('profile', 'Public\ProfileController::index');
+    $routes->post('profile', 'Public\ProfileController::update');
+    $routes->put('profile/change-password', 'Public\ProfileController::changePassword');
     $routes->get('property', 'Public\PropertyController::index');
 });
 
