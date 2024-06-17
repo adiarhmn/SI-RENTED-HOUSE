@@ -137,7 +137,7 @@
                                     <textarea class="form-control" id="address" name="address" required></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="id_user" class="form-label">Penyewa</label>
+                                    <label for="id_user" class="form-label">Penyewa <i>(Akun Penyewa)</i></label>
                                     <select class="form-select" id="id_user" name="id_user" required>
                                         <option selected disabled>Pilih Penyewa</option>
                                         <?php foreach ($DataUsers as $user) : ?>

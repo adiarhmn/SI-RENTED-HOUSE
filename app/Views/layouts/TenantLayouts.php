@@ -100,55 +100,28 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('/dashboard'); ?>">
+                <a class="nav-link" href="<?= base_url('penyewa/dashboard'); ?>">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-            <li class="nav-heading">Data Master</li>
-            <li class="nav-item">
-                <a class="nav-link " href="<?= base_url('/profil'); ?>">
-                    <i class="bi bi-blockquote-right"></i>
-                    <span>Profil Sistem</span>
-                </a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link " href="<?= base_url('/user'); ?>">
-                    <i class="bi bi-people"></i>
-                    <span>Users</span>
+                    <i class="bi bi-person"></i>
+                    <span>My Profile</span>
                 </a>
             </li>
+            <li class="nav-heading">Sewa Kost</li>
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url('/tenant'); ?>">
                     <i class="bi bi-file-person"></i>
-                    <span>Penyewa</span>
+                    <span>My Sewa</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('/property'); ?>">
-                    <i class="bi bi-house-door"></i>
-                    <span>Property</span>
-                </a>
-            </li>
-            <li class="nav-heading">Data Penyewaan</li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('rent'); ?>">
-                    <i class="bi bi-key"></i>
-                    <span>Sewa</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('payment'); ?>">
-                    <i class="bi bi-cash-coin"></i>
-                    <span>Pembayaran</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('/report'); ?>">
-                    <i class="bi bi-card-list"></i>
-                    <span>Laporan</span>
+                <a class="nav-link " href="<?= base_url('penyewa/property'); ?>">
+                    <i class="bi bi-blockquote-right"></i>
+                    <span>Cari Kost</span>
                 </a>
             </li>
         </ul>

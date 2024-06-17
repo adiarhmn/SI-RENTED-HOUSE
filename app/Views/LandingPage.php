@@ -49,7 +49,12 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted flex-md-shrink-0" href="<?= base_url('/login'); ?>">Login</a>
+
+            <?php if (session('id_user')) : ?>
+                <a class="btn-getstarted flex-md-shrink-0" href="<?= base_url(mainDashboard()); ?>">My Dashboard</a>
+            <?php else : ?>
+                <a class="btn-getstarted flex-md-shrink-0" href="<?= base_url('login'); ?>">Login</a>
+            <?php endif; ?>
 
         </div>
     </header>

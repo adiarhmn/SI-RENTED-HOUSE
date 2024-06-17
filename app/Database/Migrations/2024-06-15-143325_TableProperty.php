@@ -25,8 +25,8 @@ class TableProperty extends Migration
                 'constraint' => 11,
             ],
             'status_property' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
+                'type' => 'ENUM',
+                'constraint' => ['Tersedia', 'Rented'],
             ],
             'created_at' => [
                 'type' => 'DATETIME',

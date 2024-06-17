@@ -11,4 +11,9 @@ class DashboardController extends BaseController
     {
         return view('LandingPage');
     }
+
+    public function DashboardTenant()
+    {
+        return view('tenant/Dashboard');
+    }
 }
