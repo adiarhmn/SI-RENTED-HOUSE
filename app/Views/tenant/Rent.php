@@ -1,7 +1,7 @@
-<?= $this->extend('layouts/AdminLayouts'); ?>
+<?= $this->extend('layouts/TenantLayouts'); ?>
 <?= $this->section('content'); ?>
 <div class="pagetitle">
-    <h1>Sewa</h1>
+    <h1>My Sewa</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">Sewa</li>
@@ -15,23 +15,20 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="card-title">Daftar Data Penyewaan</h5>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#TambahModal">
-                            + Tambah Data
-                        </button>
+                        <h5 class="card-title">Daftar Riwayat Penyewaan</h5>
                     </div>
                     <!-- Default Table -->
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Penyewa</th>
+                                <th scope="col">Teman</th>
                                 <th scope="col">Mulai / Selesai</th>
                                 <th scope="col">Properti</th>
                                 <th scope="col">Status Sewa</th>
                                 <th scope="col">Status Pembayaran</th>
-                                <th scope="col">Pembayaran</th>
-                                <th scope="col">Aksi</th>
+                                <th scope="col">Riwayat Pembayaran</th>
+                                <th scope="col">Bayar</th>
                             </tr>
                         </thead>
                         <tbody style="font-size: 14px;">
@@ -39,7 +36,6 @@
                                 <tr>
                                     <th scope="row"><?= $index + 1; ?></th>
                                     <td>
-                                        <div><?= $item['name_tenant'] . " &"; ?></div>
                                         <div><?= $item['total_tenant'] - 1; ?> Teman</div>
                                     </td>
                                     <td><?= $item['date_start']; ?> / <?= $item['date_end'] ?? "0"; ?></td>
@@ -104,68 +100,65 @@
                                     </td>
                                     <td>
                                         <?php if ($item['status_rent'] != 'SELESAI') : ?>
-                                            <form action="<?= base_url('rent/process'); ?>" method="POST">
-                                                <input type="hidden" value="<?= $item['id_rent']; ?>" name="id_rent">
-                                                <input type="hidden" value="<?= $item['id_property']; ?>" name="id_property">
-                                                <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#EditModal<?= $index; ?>">
-                                                    Berhentikan
+                                            <?php if (!DistanceDays($item['total_days'], $item['date_start'])) : ?>
+                                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#BayarModal<?= $index; ?>">
+                                                    BAYAR
                                                 </button>
-                                            </form>
+                                                <!-- Bayar Modal -->
+                                                <div class="modal fade" id="BayarModal<?= $index; ?>" tabindex="-1">
+                                                    <div class="modal-dialog">
+                                                        <form action="<?= base_url('/payment'); ?>" class="modal-content" method="POST" enctype="multipart/form-data">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Tambah Pembayaran</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <input type="hidden" name="id_rent" value="<?= $item['id_rent']; ?>">
+                                                                <!-- Input Image -->
+                                                                <div class="mb-3">
+                                                                    <label for="image" class="form-label">Bukti Pembayaran</label>
+                                                                    <input type="file" class="form-control" id="image" name="evidence_payment" required>
+                                                                </div>
+                                                                <!-- Method Payment -->
+                                                                <div class="mb-3">
+                                                                    <label for="method" class="form-label">Metode Pembayaran</label>
+                                                                    <select class="form-select" id="method" name="method_payment" required>
+                                                                        <option value="Transfer">Transfer</option>
+                                                                        <option value="Cash">Cash</option>
+                                                                    </select>
+                                                                </div>
+                                                                <!-- Input Total Pembayaran -->
+                                                                <div class="mb-3">
+                                                                    <label for="total" class="form-label">Total Pembayaran</label>
+                                                                    <input type="text" class="form-control" id="total" value="<?= MoneyFormatID($item['priceper_month']); ?>" disabled>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary">Bayar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            <?php else : ?>
+                                                <button class="btn btn-info btn-sm" disabled>
+                                                    NANTI
+                                                </button>
+                                            <?php endif; ?>
                                         <?php else : ?>
-                                            <button type="button" class="btn btn-secondary btn-sm" disabled>
+                                            <button class="btn btn-secondary btn-sm" disabled>
                                                 SELESAI
                                             </button>
-                                        <?php endif ?>
+                                        <?php endif; ?>
                                     </td>
+
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
                     </table>
                     <!-- End Default Table Example -->
                 </div>
-
-                <!-- Tambah Modal -->
-                <div class="modal fade" id="TambahModal" tabindex="-1">
-                    <div class="modal-dialog">
-                        <form class="modal-content" method="POST">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Tambah Data Sewa</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- Penyewa -->
-                                <div class="mb-3">
-                                    <label for="penyewa" class="form-label">Penyewa</label>
-                                    <select class="form-select" id="penyewa" name="id_tenant">
-                                        <option selected>Pilih Penyewa</option>
-                                        <?php foreach ($DataTenants as $item) : ?>
-                                            <option value="<?= $item['id_tenant']; ?>"><?= $item['name_tenant']; ?></option>
-                                        <?php endforeach ?>
-                                    </select>
-                                </div>
-                                <!-- Property -->
-                                <div class="mb-3">
-                                    <label for="property" class="form-label">Property</label>
-                                    <select class="form-select" id="property" name="id_property">
-                                        <option selected>Pilih Property</option>
-                                        <?php foreach ($DataProperties as $item) : ?>
-                                            <option value="<?= $item['id_property']; ?>"><?= $item['name_property']; ?></option>
-                                        <?php endforeach ?>
-                                    </select>
-                                </div>
-                                <!-- Teman -->
-                                <div class="mb-3">
-                                    <label for="teman" class="form-label">Total Teman</label>
-                                    <input type="number" value="0" min="0" class="form-control" id="teman" name="total_tenant">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
-                            </div>
-                        </form>
-                    </div>
-                </div><!-- End Tambah Modal-->
             </div>
         </div>
     </div>

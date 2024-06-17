@@ -20,13 +20,43 @@ class RentController extends BaseController
         if (session()->get('role') == 'admin') {
             $this->folder_view = 'admin/';
         }
+        if (session()->get('role') == 'penyewa') {
+            $this->folder_view = 'tenant/';
+        }
     }
     public function index()
     {
+        if (session()->get('role') == 'penyewa') {
+            $DataRents = $this->RentModel->join('tenant', 'rent.id_tenant = tenant.id_tenant')
+                ->join("property", "rent.id_property = property.id_property")
+                ->where('tenant.id_user', session()->get('id_user'))
+                ->orderBy('rent.id_rent', 'DESC')
+                ->findAll();
+
+            // Mendapatkan Riwayat Payment
+            foreach ($DataRents as $key => $value) {
+                $DataRents[$key]['payment'] = $this->RentModel->join('payment', 'rent.id_rent = payment.id_rent')
+                    ->where('rent.id_rent', $value['id_rent'])
+                    ->findAll();
+            }
+
+            return view($this->folder_view . 'Rent', [
+                'DataRents' => $DataRents
+            ]);
+        }
+
         // Urutkan berdasarkan ID terbesar
         $DataRents = $this->RentModel->join('tenant', 'rent.id_tenant = tenant.id_tenant')
             ->join("property", "rent.id_property = property.id_property")
+            ->orderBy('rent.id_rent', 'DESC')
             ->findAll();
+
+        // Mendapatkan Riwayat Payment
+        foreach ($DataRents as $key => $value) {
+            $DataRents[$key]['payment'] = $this->RentModel->join('payment', 'rent.id_rent = payment.id_rent')
+                ->where('rent.id_rent', $value['id_rent'])
+                ->findAll();
+        }
 
         $DataTenants = $this->TenantModel->findAll();
         $DataProperties = $this->PropertyModel->where('status_property', 'Tersedia')->findAll();
@@ -40,7 +70,15 @@ class RentController extends BaseController
 
     public function store()
     {
-        // dd($this->request->getPost());
+
+        // CHECK APAKAH SEDANG MENYEWA
+        $DataRents = $this->RentModel->where('id_tenant', $this->request->getPost('id_tenant'))
+            ->where('status_rent', 'PENDING')
+            ->orWhere('status_rent', 'BERLANGSUNG')
+            ->first();
+        if ($DataRents != null) {
+            return redirect()->back()->withInput()->with('errors', ['status_rent' => 'Penyewa Sedang Menyewa Saat ini']);
+        }
 
         if (!$this->validate([
             'id_tenant' => 'required',
@@ -74,6 +112,22 @@ class RentController extends BaseController
                 'status_property' => 'Rented'
             ]);
         }
+
+        return redirect()->to('/rent');
+    }
+
+    public function process()
+    {
+        $id_rent = $this->request->getPost('id_rent');
+        $id_property = $this->request->getPost('id_property');
+
+        $this->RentModel->update($id_rent, [
+            'status_rent' => 'SELESAI'
+        ]);
+
+        $this->PropertyModel->update($id_property, [
+            'status_property' => 'Tersedia'
+        ]);
 
         return redirect()->to('/rent');
     }

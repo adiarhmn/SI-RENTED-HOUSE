@@ -77,14 +77,14 @@
                                                 <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#SewaModal<?= $index; ?>">
                                                     Sewa
                                                 </button>
-                                            <?php else: ?>
+                                            <?php else : ?>
                                                 <button class="btn btn-danger btn-sm" disabled>
                                                     Disewa
                                                 </button>
                                             <?php endif; ?>
 
                                             <!-- Sewa Modal -->
-                                            <div class="modal fade " id="SewaModal<?= $index; ?>" tabindex="-1">
+                                            <div class="modal fade" id="SewaModal<?= $index; ?>" tabindex="-1">
                                                 <div class="modal-dialog">
                                                     <form action="<?= base_url('rent'); ?>" method="POST" class="modal-content">
                                                         <div class="modal-header">
@@ -93,17 +93,11 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <input type="hidden" name="id_property" value="<?= $item['id_property']; ?>">
+                                                            <input type="hidden" name="id_tenant" value="<?= $DataTenant['id_tenant']; ?>">
+                                                            <!-- Teman -->
                                                             <div class="mb-3">
-                                                                <label for="date_start" class="form-label">Tanggal Mulai</label>
-                                                                <input type="date" class="form-control" id="date_start" name="date_start" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="date_end" class="form-label">Tanggal Selesai</label>
-                                                                <input type="date" class="form-control" id="date_end" name="date_end" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label for="total_tenant" class="form-label">Jumlah Penyewa</label>
-                                                                <input type="number" class="form-control" id="total_tenant" name="total_tenant" required>
+                                                                <label for="teman" class="form-label">Total Bersama Teman</label>
+                                                                <input type="number" value="0" min="0" class="form-control" id="teman" name="total_tenant">
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

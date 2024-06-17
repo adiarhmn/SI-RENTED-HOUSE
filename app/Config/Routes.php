@@ -24,8 +24,12 @@ $routes->group('', static function ($routes) {
     // Rent
     $routes->get('rent', 'Public\RentController::index');
     $routes->post('rent', 'Public\RentController::store');
+    $routes->post('rent/process', 'Public\RentController::process');
     $routes->put('rent/(:num)', 'Public\RentController::update/$1');
     $routes->delete('rent/(:num)', 'Public\RentController::destroy/$1');
+
+    // Payment
+    $routes->post('payment', 'Admin\PaymentController::store');
 });
 
 // Private Routes Tenant
@@ -66,7 +70,6 @@ $routes->group('', ['filter' => 'AdminFilter'], static function ($routes) {
 
     // Payment
     $routes->get('payment', 'Admin\PaymentController::index');
-    $routes->post('payment', 'Admin\PaymentController::store');
     $routes->post('payment/process', 'Admin\PaymentController::process');
     $routes->put('payment/(:num)', 'Admin\PaymentController::update/$1');
     $routes->delete('payment/(:num)', 'Admin\PaymentController::destroy/$1');

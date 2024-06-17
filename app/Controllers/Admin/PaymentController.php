@@ -21,6 +21,7 @@ class PaymentController extends BaseController
         $DataPayments = $this->PaymentModel->join('rent', 'payment.id_rent = rent.id_rent')
             ->join('tenant', 'rent.id_tenant = tenant.id_tenant')
             ->join('property', 'rent.id_property = property.id_property')
+            ->orderBy('payment.id_payment', 'DESC')
             ->findAll();
         $DataRents = $this->RentModel->join('tenant', 'rent.id_tenant = tenant.id_tenant')
             ->join("property", "rent.id_property = property.id_property")
@@ -60,6 +61,10 @@ class PaymentController extends BaseController
             'payment_status' => 'Pending',
             'evidence_payment' => $newName,
         ]);
+
+        if (session()->get('role') == 'penyewa') {
+            return redirect()->to('/rent')->with('success', 'Pembayaran Berhasil Ditambahkan');
+        }
 
         return redirect()->to('/payment')->with('success', 'Pembayaran Berhasil Ditambahkan');
     }

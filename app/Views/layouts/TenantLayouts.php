@@ -106,14 +106,14 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="<?= base_url('/user'); ?>">
+                <a class="nav-link " href="<?= base_url('penyewa/profile'); ?>">
                     <i class="bi bi-person"></i>
                     <span>My Profile</span>
                 </a>
             </li>
             <li class="nav-heading">Sewa Kost</li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('/tenant'); ?>">
+                <a class="nav-link" href="<?= base_url('rent'); ?>">
                     <i class="bi bi-file-person"></i>
                     <span>My Sewa</span>
                 </a>
