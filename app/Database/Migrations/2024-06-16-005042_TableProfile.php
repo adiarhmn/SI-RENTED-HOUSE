@@ -16,8 +16,8 @@ class TableProfile extends Migration
                 'auto_increment' => true,
             ],
             'title' => [
-                'type' => 'ENUM',
-                'constraint' => ['VISI', 'ABOUT US', 'MISI', 'OUR TEAM', 'CONTACT US'],
+                'type' => 'VARCHAR',
+                'constraint' => 255,
             ],
             'content' => [
                 'type' => 'TEXT',

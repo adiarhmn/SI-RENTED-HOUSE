@@ -10,5 +10,6 @@ class AutoSeeder extends Seeder
     {
         $this->call('UserSeeder');
         $this->call('TenantSeeder');
+        $this->call('ProfileSystemSeeder');
     }
 }

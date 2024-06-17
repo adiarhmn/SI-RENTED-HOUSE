@@ -36,7 +36,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a href="/" class="logo d-flex align-items-center">
                 <img src="<?= base_url(); ?>assets/img/logo.png" alt="">
                 <span class="d-none d-lg-block">ADI-SEWAKOS</span>
             </a>
@@ -107,7 +107,7 @@
             </li>
             <li class="nav-heading">Data Master</li>
             <li class="nav-item">
-                <a class="nav-link " href="<?= base_url('/profil'); ?>">
+                <a class="nav-link " href="<?= base_url('/profile'); ?>">
                     <i class="bi bi-blockquote-right"></i>
                     <span>Profil Sistem</span>
                 </a>

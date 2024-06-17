@@ -41,7 +41,7 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="#hero" class="active">Beranda<br></a></li>
-                    <li><a href="#portfolio">Sewa</a></li>
+                    <li><a href="<?= base_url(((session('role') == 'penyewa' ? "penyewa/" : "")) . 'property'); ?>">Sewa</a></li>
                     <li><a href="#tentang">Tentang</a></li>
                     <li><a href="#penawaran">Penawaran</a></li>
                     <li><a href="#contact">Kontak Kami</a></li>
@@ -70,7 +70,7 @@
                         <h1 data-aos="fade-up">Sistem Penyewaan Kos Terpecaya</h1>
                         <p data-aos="fade-up" data-aos-delay="100">Solusi Cepat dan Mudah untuk Menemukan Tempat Tinggal Ideal</p>
                         <div class="d-flex flex-column flex-md-row" data-aos="fade-up" data-aos-delay="200">
-                            <a href="#about" class="btn-get-started">Mulai Cari <i class="bi bi-arrow-right"></i></a>
+                            <a href="<?= base_url(((session('role') == 'penyewa' ? "penyewa/" : "")) . 'property'); ?>" class="btn-get-started">Mulai Cari <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out">
@@ -92,12 +92,10 @@
                     <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="content">
                             <h3>APA ITU ADI-SEWAKOS ?</h3>
-                            <h2>Sistem Informasi Penyewaan Kos-kosan Terpecaya dan Mudah</h2>
-                            <p>
-                                Sistem kami dirancang untuk mempermudah proses penyewaan kos-kosan. Dari pengelolaan penyewa hingga pembayaran sewa, semuanya dapat dilakukan dengan cepat dan efisien.
-                            </p>
+                            <h2><?= $slogan; ?></h2>
+                            <p><?= $about; ?></p>
                             <div class="text-center text-lg-start">
-                                <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                                <a href="#penawaran" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
                                     <span>Lainnya</span>
                                     <i class="bi bi-arrow-right"></i>
                                 </a>
@@ -133,7 +131,7 @@
                         <div class="card">
                             <img src="<?= base_url(); ?>assets/flexstart/img/values-1.png" class="img-fluid" alt="">
                             <h3>Harga Murah Dan Pembayaran Mudah</h3>
-                            <p>Eum ad dolor et. Autem aut fugiat debitis voluptatem consequuntur sit. Et veritatis id.</p>
+                            <p>INI DATA STATIS Eum ad dolor et. Autem aut fugiat debitis voluptatem consequuntur sit. Et veritatis id.</p>
                         </div>
                     </div><!-- End Card Item -->
 
@@ -141,7 +139,7 @@
                         <div class="card">
                             <img src="<?= base_url(); ?>assets/flexstart/img/values-2.png" class="img-fluid" alt="">
                             <h3>Keamanan dan Penjagaan</h3>
-                            <p>Repudiandae amet nihil natus in distinctio suscipit id. Doloremque ducimus ea sit non.</p>
+                            <p>INI DATA STATIS Repudiandae amet nihil natus in distinctio suscipit id. Doloremque ducimus ea sit non.</p>
                         </div>
                     </div><!-- End Card Item -->
 
@@ -149,7 +147,7 @@
                         <div class="card">
                             <img src="<?= base_url(); ?>assets/flexstart/img/values-3.png" class="img-fluid" alt="">
                             <h3>Manajemen Sewa Kos Mudah</h3>
-                            <p>Quam rem vitae est autem molestias explicabo debitis sint. Vero aliquid quidem commodi.</p>
+                            <p>INI DATA STATIS Quam rem vitae est autem molestias explicabo debitis sint. Vero aliquid quidem commodi.</p>
                         </div>
                     </div><!-- End Card Item -->
 
@@ -230,8 +228,7 @@
                                     <i class="bi bi-geo-alt"></i>
                                     <div>
                                         <h3>Alamat</h3>
-                                        <p>A108 Adam Street</p>
-                                        <p>New York, NY 535022</p>
+                                        <p><?= $address; ?></p>
                                     </div>
                                 </div>
                             </div><!-- End Info Item -->
@@ -241,8 +238,7 @@
                                     <i class="bi bi-telephone"></i>
                                     <div>
                                         <h3>Call Us</h3>
-                                        <p>+1 5589 55488 55</p>
-                                        <p>+1 6678 254445 41</p>
+                                        <p><?= $telp; ?></p>
                                     </div>
                                 </div>
                             </div><!-- End Info Item -->
@@ -252,8 +248,7 @@
                                     <i class="bi bi-envelope"></i>
                                     <div>
                                         <h3>Email Us</h3>
-                                        <p>info@example.com</p>
-                                        <p>contact@example.com</p>
+                                        <p><?= $email; ?></p>
                                     </div>
                                 </div>
                             </div><!-- End Info Item -->
@@ -263,7 +258,6 @@
                                     <i class="bi bi-clock"></i>
                                     <div>
                                         <h3>Open Hours</h3>
-                                        <p>Monday - Friday</p>
                                         <p>9:00AM - 05:00PM</p>
                                     </div>
                                 </div>
@@ -285,46 +279,18 @@
 
         <div class="container footer-top">
             <div class="row gy-4">
-                <div class="col-lg-4 col-md-6 footer-about">
-                    <a href="index.html" class="d-flex align-items-center">
-                        <span class="sitename">FlexStart</span>
-                    </a>
-                    <div class="footer-contact pt-3">
-                        <p>A108 Adam Street</p>
-                        <p>New York, NY 535022</p>
-                        <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                        <p><strong>Email:</strong> <span>info@example.com</span></p>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-                    </ul>
-                </div>
-
                 <div class="col-lg-4 col-md-12">
-                    <h4>Follow Us</h4>
+                    <h4>Follow Media Sosial Kami</h4>
                     <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
-                    <div class="social-links d-flex">
-                        <a href=""><i class="bi bi-twitter-x"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
+                    <div class="social-links d-flex flex-column gap-2">
+                        <div class="d-flex align-items-center">
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <span style="font-size: 17px;" class="text-primary">: <?= $facebook; ?></span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <a href=""><i class="bi bi-instagram"></i></a>
+                            <span style="font-size: 17px;" class="text-primary">: <?= $instagram; ?></span>
+                        </div>
                     </div>
                 </div>
 
@@ -332,13 +298,9 @@
         </div>
 
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">FlexStart</strong> <span>All Rights Reserved</span></p>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you've purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">Adi</strong> <span>All Rights Reserved</span></p>
+            <div>
+                Designed by Adios
             </div>
         </div>
 

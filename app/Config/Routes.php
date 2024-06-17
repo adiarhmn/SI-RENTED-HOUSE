@@ -46,6 +46,10 @@ $routes->group('penyewa', ['filter' => 'TenantFilter'], static function ($routes
 $routes->group('', ['filter' => 'AdminFilter'], static function ($routes) {
 
     $routes->get('dashboard', 'Admin\DashboardController::index');
+
+    // Profile
+    $routes->get('profile', 'Admin\ProfileSystemController::index');
+    $routes->post('profile', 'Admin\ProfileSystemController::update');
     // Users
     $routes->get('user', 'Admin\UserController::index');
     $routes->post('user', 'Admin\UserController::store');
