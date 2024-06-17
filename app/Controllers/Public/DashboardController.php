@@ -19,7 +19,7 @@ class DashboardController extends BaseController
             'address' => $this->ProfileModel->where('title', 'address')->first()['content'] ?? "",
             'about' => $this->ProfileModel->where('title', 'about')->first()['content'] ?? "",
             'telp' => $this->ProfileModel->where('title', 'telp')->first()['content'] ?? "",
-            'email' => $this->ProfileModel->where('title', 'email')->first()['content'],
+            'email' => $this->ProfileModel->where('title', 'email')->first()['content'] ?? "",
             'instagram' => $this->ProfileModel->where('title', 'instagram')->first()['content'] ?? "",
             'facebook' => $this->ProfileModel->where('title', 'facebook')->first()['content'] ?? "",
         ];
