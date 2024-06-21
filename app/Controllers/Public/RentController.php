@@ -72,10 +72,11 @@ class RentController extends BaseController
     {
 
         // CHECK APAKAH SEDANG MENYEWA
-        $DataRents = $this->RentModel->where('id_tenant', $this->request->getPost('id_tenant'))
-            ->where('status_rent', 'PENDING')
-            ->orWhere('status_rent', 'BERLANGSUNG')
+        $DataTenant = $this->TenantModel->where('id_user', session('id_user'))->first();
+        $DataRents = $this->RentModel->where('id_tenant', $DataTenant['id_tenant'])
+            ->where('status_rent !=', 'SELESAI')
             ->first();
+
         if ($DataRents != null) {
             return redirect()->back()->withInput()->with('errors', ['status_rent' => 'Penyewa Sedang Menyewa Saat ini']);
         }
@@ -103,8 +104,6 @@ class RentController extends BaseController
             'priceper_month' => $Property['price_property'] * ($this->request->getPost('total_tenant') + 1),
         ];
 
-        // $DB = \Config\Database::connect();
-        // $DB->transStart();
         $result = $this->RentModel->insert($dataRent);
 
         if ($result) {
